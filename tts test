@@ -1,0 +1,40 @@
+from TTS.api import TTS
+import sounddevice as sd
+import time
+
+print("🔊 Loading FRIDAY voice model...")
+
+# Female voice model
+tts = TTS(
+    model_name="tts_models/en/ljspeech/tacotron2-DDC",
+    progress_bar=True
+)
+
+print("✅ Model loaded!")
+
+# FRIDAY-style text
+text = """
+Good evening, sir.
+All systems are functioning normally.
+Global communications and monitoring systems are online.
+How may I assist you today?
+"""
+
+# Add cinematic pauses 😏
+text = text.replace(",", "...")
+text = text.replace("sir.", "sir...")
+
+print("🎙️ Generating speech...")
+
+# Generate audio
+wav = tts.tts(text=text)
+
+print("🔊 Playing audio...")
+
+# Play audio
+sd.play(wav, samplerate=22050)
+sd.wait()
+
+time.sleep(0.5)
+
+print("✅ FRIDAY test complete.")

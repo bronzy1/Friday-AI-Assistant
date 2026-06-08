@@ -1,0 +1,10 @@
+from vosk import Model
+import os
+
+MODEL_PATH = "vosk-model-small-en-us-0.15"
+
+print("Exists:", os.path.exists(MODEL_PATH))
+print("Inside:", os.listdir(MODEL_PATH))
+
+model = Model(MODEL_PATH)
+print("✅ Model loaded")
